@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 // webpack.common.js
 const path = require('path')
 
@@ -20,6 +19,19 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
+      },
+      // for babel
+      {
+        test: /\.(?:js|mjs|cjs)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            targets: 'defaults',
+            presets: [['@babel/preset-env']],
+          },
+        },
       },
     ],
   },
